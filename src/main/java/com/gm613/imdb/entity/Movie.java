@@ -18,10 +18,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.ToString;
 
-@Data
+@ToString
 @Entity
+@Getter
 @Table(name = "movies")
 public class Movie implements Serializable{
     @Id
@@ -41,7 +43,7 @@ public class Movie implements Serializable{
     private Studio studio;
 
     @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(name = "Movie_Actor", 
+    @JoinTable(name = "plays", 
     joinColumns = { @JoinColumn(name = "movie_id") },
     inverseJoinColumns = { @JoinColumn(name = "actor_id") })
     Set<Actor> actors = new HashSet<>();

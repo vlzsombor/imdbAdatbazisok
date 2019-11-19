@@ -37,6 +37,8 @@
 	</nav>
 
 
+
+
 	<div class="container my-2">
 		<div class="card">
 			<div class="card-body">
@@ -51,6 +53,7 @@
 									<th>Id</th>
 									<th>Movie's title</th>
 									<th>Studio's name</th>
+									<th>Actor's name</th>
 									<th>Edit</th>
 									<th>Delete</th>
 								</tr>
@@ -60,6 +63,33 @@
 									<td th:text="${movie.id}"></td>
 									<td th:text="${movie.title}"></td>
 									<td th:text="${movie.studio.name}"></td>
+									<td>
+										<table>
+											<thead>
+												<tr>
+													<th>First Name</th>
+													<th>Last Name</th>
+													<th>Gender</th>
+													<th>Image</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="actor : ${movie.actors}">
+													<td th:text="${actor.first_name}"></td>
+													<td th:text="${actor.last_name}"></td>
+													<td th:text="${actor.gender}"></td>
+													<td><img th:src="${actor.img}" class="img-fluid"
+														alt="Responsive image"></td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+									<td>
+										<a th:href="@{/movies/edit/{id}(id=${movie.id})}" class="btn btn-primary">
+											<i class="fas fa-user-edit ml-2"></i>
+										</a>
+									</td>
+
 
 								</tr>
 							</tbody>
@@ -69,5 +99,8 @@
 			</div>
 		</div>
 	</div>
+
+
+
 </body>
 </html>

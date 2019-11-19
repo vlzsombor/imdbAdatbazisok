@@ -12,10 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.ToString;
 
-@Data
+@ToString
+@Getter
 @Entity
 @Table(name = "actors")
 public class Actor implements Serializable{
