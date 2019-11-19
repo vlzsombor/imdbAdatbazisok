@@ -1,21 +1,26 @@
 package com.gm613.imdb.entity;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
 @Table(name = "actors")
-public class Actor {
+public class Actor implements Serializable{
     @Id
-    @Column(name = "id")
+    @Column(name = "actor_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
@@ -31,4 +36,6 @@ public class Actor {
     @Column(name = "img")
     private String img;
     
+    @ManyToMany(mappedBy = "actors")
+    @ToString.Exclude private Set<Movie> movies = new HashSet<>();
 }

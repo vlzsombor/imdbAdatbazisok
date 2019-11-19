@@ -37,24 +37,22 @@
 	<div class="container my-2">
 		<div class="card">
 			<div class="card-body"></div>
-			<div th:switch="${queries}" class="container my-5">
+			<div class="container my-5">
 				<div class="col-md-10">
-					<div th:case="*">
-						<table class="table table-striped table-responsive-md">
-							<thead>
-								<tr>
-									<th>Actors's name</th>
-									<th>Amount of movies</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="query : ${queries}">
-									<td th:text="${query.get(0)} + TO_RESOLVE +${query.get(1)}"></td>
-									<td th:text="${query.get(2)}"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					<table class="table table-striped table-responsive-md">
+						<thead>
+							<tr>
+								<th>Actors's name</th>
+								<th>Amount of movies</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="query : ${queries}">
+								<td th:text="${query.get(0)} + TO_RESOLVE +${query.get(1)}"></td>
+								<td th:text="${query.get(2)}"></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

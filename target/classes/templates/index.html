@@ -40,33 +40,30 @@
 	<div class="container my-2">
 		<div class="card">
 			<div class="card-body">
-				<div th:switch="${movies}" class="container my-5">
-					<p class="my-5">
-						<a href="signup" class="btn btn-primary"><i
-							class="fas fa-user-plus ml-2"> Add Movie</i></a>
-					</p>
+				<div class="container my-5">
+					<div class="my-5">
+						<a class="btn btn-primary" href="#" role="button">Add movie</a>
+					</div>
 					<div class="col-md-10">
-						<div th:case="*">
-							<table class="table table-striped table-responsive-md">
-								<thead>
-									<tr>
-										<th>Id</th>
-										<th>Movie's title</th>
-										<th>Studio's name</th>
-										<th>Edit</th>
-										<th>Delete</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="movie : ${movies}">
-										<td th:text="${movie.id}"></td>
-										<td th:text="${movie.title}"></td>
-										<td th:text="${movie.studio.name}"></td>
+						<table class="table table-striped table-responsive-md">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Movie's title</th>
+									<th>Studio's name</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="movie : ${movies}">
+									<td th:text="${movie.id}"></td>
+									<td th:text="${movie.title}"></td>
+									<td th:text="${movie.studio.name}"></td>
 
-									</tr>
-								</tbody>
-							</table>
-						</div>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>

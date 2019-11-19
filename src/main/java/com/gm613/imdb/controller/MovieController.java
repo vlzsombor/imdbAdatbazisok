@@ -1,16 +1,11 @@
 package com.gm613.imdb.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gm613.imdb.entity.Movie;
 import com.gm613.imdb.repository.ActorRepository;
 import com.gm613.imdb.repository.MovieRepository;
 import com.gm613.imdb.repository.StudiosRepository;
@@ -31,6 +26,9 @@ public class MovieController {
     @GetMapping("/")
     public String showSignUpForm(Model model) {
 	model.addAttribute("movies", movieRepository.findAll());
+	System.out.println(actorRepository.findAll());
+	System.out.println(movieRepository.findAll());
+//	actorRepository.findAll().stream().forEach(t -> System.out.println(t.getMovies()));
 	return "index";
     }
 
@@ -54,18 +52,4 @@ public class MovieController {
 	return "showByGender";
     }
 
-    @GetMapping("signup")
-    public String showSignUpForm(Movie movie) {
-	return "add-student";
-    }
-
-    @PostMapping("add")
-    public String addStudent(@Valid Movie movie, BindingResult result, Model model) {
-	if (result.hasErrors()) {
-	    return "add-student";
-	}
-
-	movieRepository.save(movie);
-	return "redirect:list";
-    }
 }

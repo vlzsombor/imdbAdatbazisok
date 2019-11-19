@@ -14,20 +14,18 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 	    + "order by moviesTitleNumber", nativeQuery = true)
     List<List<String>> countStudiosMovies();
 
-    @Query(value = "select actors.first_name, actors.last_name, Count(movies.title) as countTitles\r\n"
-	    + "from actors\r\n" + "inner join szereplesek on actors.id = szereplesek.actorsId\r\n"
-	    + "inner join movies on movies.id = szereplesek.moviesId\r\n" + "group by actors.first_name\r\n"
-	    + "order by countTitles desc\r\n"
-
-	    , nativeQuery = true)
+    @Query(value = "select actors.first_name, actors.last_name, Count(movies.title) as countTitles \r\n" + 
+    	"from actors inner join plays on actors.actor_id = plays.actors_id \r\n" + 
+    	"inner join movies on movies.movie_id = plays.movies_id\r\n" + 
+    	"group by actors.first_name  \r\n" + 
+    	"order by countTitles desc",
+    	nativeQuery = true)
     List<List<String>> countActorsInMovies();
 
-    @Query(value = "select actors.first_name, actors.last_name \r\n" + 
-    	"from actors \r\n" + 
+    @Query(value = "select actors.first_name, actors.last_name" + 
+    	"from actors" + 
     	"where actors.gender = ?",
 	    nativeQuery = true)
     List<List<String>> showByGender(String gender);
-
-    
 
 }
