@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gm613.imdb.entity.Actor;
 import com.gm613.imdb.entity.Movie;
 import com.gm613.imdb.repository.ActorRepository;
 import com.gm613.imdb.repository.MovieRepository;
@@ -89,7 +90,8 @@ public class MovieController {
     }
 
     @GetMapping("signup")
-    public String showSignUpForm(Movie movie) {
+    public String showSignUpForm(Model model,Movie movie) {
+	model.addAttribute("movie", movie);
 	return "add-movie";
     }
 
@@ -101,6 +103,11 @@ public class MovieController {
 	}
 	movieRepository.save(movie);
 	return "redirect:/movies/";
+    }
+    
+    @GetMapping("add-actor")
+    public String addActor(Model model,Actor actor) {
+	return "add-actor";
     }
 
 }
