@@ -85,7 +85,7 @@ public class MovieController {
 		.orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
 	movieRepository.delete(movie);
 	model.addAttribute("students", movieRepository.findAll());
-	return "index";
+	return "redirect:/movies/";
     }
 
     @GetMapping("signup")
@@ -102,4 +102,5 @@ public class MovieController {
 	movieRepository.save(movie);
 	return "redirect:/movies/";
     }
+
 }
