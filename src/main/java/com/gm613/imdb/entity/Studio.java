@@ -3,6 +3,7 @@ package com.gm613.imdb.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,17 +18,16 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "studios")
-public class Studio implements Serializable{
+public class Studio implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Column(name = "name")
-    private String name; 
-    
-    
-//    @OneToMany
-//    @JoinColumn(name="id")
-//    private List<Movie> movie;
+    private String name;
+
+    @OneToMany(cascade = CascadeType.ALL,
+	    mappedBy = "studio", orphanRemoval = true)
+    private List<Movie> movie;
 }

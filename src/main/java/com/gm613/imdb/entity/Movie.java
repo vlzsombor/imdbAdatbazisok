@@ -18,14 +18,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 
-@ToString
+@Data
 @Entity
-@Getter
 @Table(name = "movies")
-public class Movie implements Serializable{
+public class Movie implements Serializable {
     @Id
     @Column(name = "movie_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,16 +36,13 @@ public class Movie implements Serializable{
     @Column(name = "genre")
     private String genre;
 
-    @ManyToOne(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER )
     @JoinColumn(name = "studio_id", referencedColumnName = "id")
     private Studio studio;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(name = "plays", 
-    joinColumns = { @JoinColumn(name = "movie_id") },
-    inverseJoinColumns = { @JoinColumn(name = "actor_id") })
-    Set<Actor> actors = new HashSet<>();
-//    @ManyToMany
-//    @JoinColumn(name="id")
-//    List<Actor> actors = new ArrayList<>();
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "plays", joinColumns = { @JoinColumn(name = "movie_id") }, inverseJoinColumns = {
+	    @JoinColumn(name = "actor_id") })
+    private Set<Actor> actors = new HashSet<>();
+
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +14,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
-@ToString
 @Getter
+@Setter
+@RequiredArgsConstructor
+@ToString 
 @Entity
 @Table(name = "actors")
 public class Actor implements Serializable{
@@ -37,6 +42,7 @@ public class Actor implements Serializable{
     @Column(name = "img")
     private String img;
     
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany(mappedBy = "actors",
+	cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @ToString.Exclude private Set<Movie> movies = new HashSet<>();
 }
