@@ -13,6 +13,53 @@
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
+<script>
+	/*let addRow = function() {
+		// Find a <table> element with id="myTable":
+		var table = document.getElementById("addTable");
+
+		// Create an empty <tr> element and add it to the 1st position of the table:
+		var row = table.insertRow(1);
+
+		// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+		var cell1 = row.insertCell(0);
+		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
+
+		// Add some text to the new cells:
+		cell1.innerHTML = "NEW CELL1";
+		cell2.innerHTML = "NEW CELL2";
+		cell3.innerHTML = "NEW CELL3";
+	};*/
+	let addRow = function () {
+        let listName = 'movies'; //list name in Catalog.class
+        let fieldsNames = ['first_name']; //field names from Movie.class
+        let rowIndex = document.querySelectorAll('.item').length; //we can add mock class to each movie-row
+
+        let row = document.createElement('div');
+        row.classList.add('row', 'item');
+
+        fieldsNames.forEach((fieldName) => {
+            let col = document.createElement('div');
+            col.classList.add('col', 'form-group');
+            if (fieldName === 'id') {
+                col.classList.add('d-none'); //field with id - hidden
+            }
+
+            let input = document.createElement('input');
+            input.type = 'text';
+            input.classList.add('form-control');
+            input.id = listName + rowIndex + '.' + fieldName;
+            input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
+
+            col.appendChild(input);
+            row.appendChild(col);
+        });
+
+        document.getElementById('sajatMovieList').appendChild(row);
+};
+
+</script>
 </head>
 <body>
 
@@ -108,52 +155,39 @@
 											th:field="*{studio.id}" name="studio" placeholder="Studio"
 											value="5">Viacom
 									</label></td>
-
-
 									<td>
-										<table>
+										<table id="addTable">
 											<thead>
 												<tr>
 													<th>First Name</th>
 													<th>Last Name</th>
 													<th>Gender</th>
-													<th>Image</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-												</tr>
 												<tr th:each="actor : ${movie.actors}">
-													<td></td>
 													<td th:text="${actor.first_name}"></td>
 													<td th:text="${actor.last_name}"></td>
 													<td th:text="${actor.gender}"></td>
-													<td><img th:src="${actor.img}" class="img-fluid"
-														alt="Responsive image"></td>
 												</tr>
 											</tbody>
 										</table>
 									</td>
-									<td>
-									<a class="btn btn-primary" href="add-actor/" role="button">Add actor</a></td>
+									<td><a class="btn btn-primary" href="add-actor/"
+										role="button">Add actor</a></td>
 
 								</tr>
 							</tbody>
 						</table>
 
-
-
-
 						<div class="form-group col-md-8">
 							<input type="submit" class="btn btn-primary" value="Add student">
 						</div>
-
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-
 
 </body>
 </html>

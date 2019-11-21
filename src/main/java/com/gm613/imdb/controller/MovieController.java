@@ -1,11 +1,13 @@
 package com.gm613.imdb.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,8 @@ import com.gm613.imdb.repository.StudiosRepository;
 @RequestMapping("/movies/")
 public class MovieController {
 
+    private Set<Actor> actors = new HashSet<>();
+
     @Autowired
     private MovieRepository movieRepository;
 
@@ -34,6 +38,7 @@ public class MovieController {
     @GetMapping("/")
     public String showSignUpForm(Model model) {
 	model.addAttribute("movies", movieRepository.findAll());
+	actors.clear();
 	return "index";
     }
 
@@ -65,11 +70,9 @@ public class MovieController {
 
     @PostMapping("update/{id}")
     public String updateStudent(@PathVariable("id") long id, /* @Valid */@ModelAttribute Movie movie, Model model) {
-//	System.out.println(movie2);
-//	System.out.println(id);
-//	movieRepository.save(movie);
+	System.out.println(id);
+	//movieRepository.save(movie);
 	System.out.println(movie);
-	// model.addAttribute("movies", movieRepository.findAll());
 	return "index";
     }
 
@@ -90,24 +93,34 @@ public class MovieController {
     }
 
     @GetMapping("signup")
-    public String showSignUpForm(Model model,Movie movie) {
+    public String showSignUpForm(Model model, Movie movie, Actor actor) {
+	movie.setActors(this.actors);
 	model.addAttribute("movie", movie);
 	return "add-movie";
     }
 
     @PostMapping("add")
-    public String addStudent(@Valid Movie movie, BindingResult result, Model model) {
+    public String addStudent(@Valid Movie movie, Model model) {
 	System.out.println(movie);
-	if (result.hasErrors()) {
-	    return "add-student";
-	}
+	movie.setActors(this.actors);
 	movieRepository.save(movie);
-	return "redirect:/movies/";
+	this.actors.clear();
+	return "redirect:";
     }
-    
+
     @GetMapping("add-actor")
-    public String addActor(Model model,Actor actor) {
+    public String addActorGet(Model model, Actor actor) {
+	model.addAttribute("actor", actor);
 	return "add-actor";
+    }
+
+    @PostMapping("add-actor")
+    public String addActorPost(Model model, Actor actor) {
+	// setCorrectActorId(actor);
+	actors.add(actor);
+	System.out.println(this.actors);
+	// actorRepository.save(actor);
+	return "redirect:signup";
     }
 
 }

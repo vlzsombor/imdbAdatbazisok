@@ -21,7 +21,8 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
     List<List<String>> countActorsInMovies();
 
     @Query(value = "select actors.first_name, actors.last_name " + "from actors "
-	    + "where actors.gender = ?", nativeQuery = true)
+	    + "where actors.gender = (Select gender from actors where gender = ?)"
+	    , nativeQuery = true)
     List<List<String>> showByGender(String gender);
 
 }
