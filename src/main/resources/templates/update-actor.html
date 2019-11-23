@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Add User</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<body>
+
+
+	<table>
+		<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Gender</th>
+				<th>Image</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="actor : ${movie.actors}">
+				<td><input type="text" th:value="${actor.first_name}"
+					class="form-control" id="first_name" placeholder="First Name"></td>
+				<td><input type="text" th:value="${actor.last_name}"
+					class="form-control" id="last_name" placeholder="Last Name"></td>
+				<td><input type="text" th:value="${actor.gender}"
+					class="form-control" id="gender" placeholder="Gender"></td>
+				<td><img th:src="${actor.img}" class="img-fluid"
+					alt="Responsive image"></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+</body>
+</html>
+
+

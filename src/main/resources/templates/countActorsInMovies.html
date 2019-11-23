@@ -16,7 +16,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="/movies/">Navbar</a>
+		<a class="navbar-brand" href="/movies/">Home</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -26,11 +26,14 @@
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link"
 					href="countStudiosMovies">Studio count</a></li>
-				<li class="nav-item active"><a class="nav-link" href="#">Pricing</a>
-				</li>
+				<li class="nav-item active"><a class="nav-link"
+					href="countActorsInMovies">Count actors in movies</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="showByGender">Al lekérdezés</a></li>
 			</ul>
 		</div>
 	</nav>
+
 
 
 
@@ -48,7 +51,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="query : ${queries}">
-								<td th:text="${query.get(0)} + TO_RESOLVE +${query.get(1)}"></td>
+								<td th:text="${query.get(0)} + ' ' +${query.get(1)}"></td>
 								<td th:text="${query.get(2)}"></td>
 							</tr>
 						</tbody>

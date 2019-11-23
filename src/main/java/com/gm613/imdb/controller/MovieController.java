@@ -1,7 +1,7 @@
 package com.gm613.imdb.controller;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gm613.imdb.entity.Actor;
 import com.gm613.imdb.entity.Movie;
+import com.gm613.imdb.entity.Studio;
 import com.gm613.imdb.repository.ActorRepository;
 import com.gm613.imdb.repository.MovieRepository;
 import com.gm613.imdb.repository.StudiosRepository;
@@ -24,7 +25,7 @@ import com.gm613.imdb.repository.StudiosRepository;
 @RequestMapping("/movies/")
 public class MovieController {
 
-    private Set<Actor> actors = new HashSet<>();
+    private List<Actor> actors = new ArrayList<>();
 
     @Autowired
     private MovieRepository movieRepository;
@@ -70,10 +71,11 @@ public class MovieController {
 
     @PostMapping("update/{id}")
     public String updateStudent(@PathVariable("id") long id, /* @Valid */@ModelAttribute Movie movie, Model model) {
-	System.out.println(id);
-	//movieRepository.save(movie);
-	System.out.println(movie);
-	return "index";
+	System.out.println(movie.getStudio());
+	Studio studio = movie.getStudio();
+	movie.setStudio(setStudio(studio));
+	movieRepository.save(movie);
+	return "redirect:/movies/";
     }
 
     /*
@@ -116,11 +118,23 @@ public class MovieController {
 
     @PostMapping("add-actor")
     public String addActorPost(Model model, Actor actor) {
-	// setCorrectActorId(actor);
 	actors.add(actor);
-	System.out.println(this.actors);
-	// actorRepository.save(actor);
 	return "redirect:signup";
+    }
+    
+    private Studio setStudio(Studio studio) {
+	if(studio.getId() == 1) {
+	    studio.setName("Sony Pictures");
+	}else if(studio.getId() == 2) {
+	    studio.setName("WarnerMedia");
+    	}else if(studio.getId() == 3) {
+    	    studio.setName("Walt Disney Studios");
+    	}else if(studio.getId() == 4) {
+    	    studio.setName("NBCUniversal");
+    	}else if(studio.getId() == 5) {
+    	    studio.setName("Vicom");
+    	}
+	return studio;
     }
 
 }

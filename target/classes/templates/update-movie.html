@@ -31,26 +31,20 @@
 				<li class="nav-item active"><a class="nav-link"
 					href="countActorsInMovies">Count actors in movies</a></li>
 				<li class="nav-item active"><a class="nav-link"
-					href="showByGender">Show actors by gender</a></li>
+					href="showByGender">Al lekérdezés</a></li>
 			</ul>
 		</div>
 	</nav>
 
 
-
-
 	<div class="container my-5">
-		<h3>Update Student</h3>
+		<h3>Update Movie</h3>
 		<div class="card">
 			<div class="card-body">
 				<div class="col-md-8">
 					<form action="#" th:action="@{/movies/update/{id}(id=${movie.id})}"
 						th:object="${movie}" method="post">
 						<div class="row">
-							<div class="form-group col-md-6">
-								<label for="title" class="col-form-label">Name</label> <input
-									type="text" th:field="*{genre}" id="title" placeholder="title" />
-							</div>
 
 
 							<div class="form-group col-md-6">
@@ -66,9 +60,24 @@
 							</div>
 
 							<div class="form-group col-md-6">
-								<label for="studio" class="col-form-label">Studio</label> <input
-									type="text" th:field="*{studio.name}" class="form-control"
-									id="studio" placeholder="Genre">
+								<label class="checkbox"> <input type="radio"
+									th:field="*{studio.id}" name="studio" placeholder="Studio"
+									value="1">Sony Pictures
+								</label> <label class="checkbox"> <input type="radio"
+									th:field="*{studio.id}" name="studio" placeholder="Studio"
+									value="2">Warner media
+								</label> <label class="checkbox"> <input type="radio"
+									th:field="*{studio.id}" name="studio" placeholder="Studio"
+									value="3">Walt Disney Studios
+								</label> <label class="checkbox"> <input type="radio"
+									th:field="*{studio.id}" name="studio" placeholder="Studio"
+									value="4">NBCUniversal
+								</label> <label class="checkbox"> <input type="radio"
+									th:field="*{studio.id}" name="studio" placeholder="Studio"
+									value="5">Viacom
+								</label>
+
+
 							</div>
 
 							<div class="form-group col-md-6">
@@ -85,17 +94,27 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr th:each="actor : ${movie.actors}">
-											<td><input type="text" th:value="${actor.first_name}"
-												class="form-control" id="first_name"
-												placeholder="First Name"></td>
+										<tr th:each="actor,stat : ${movie.actors}">
+											<td><input type="text" class="form-control"
+												id="first_name" placeholder="First Name"
+												th:field="*{actors[__${stat.index}__].first_name}"
+												th:value="${actor.first_name}"></td>
 											<td><input type="text" th:value="${actor.last_name}"
-												class="form-control" id="last_name" placeholder="Last Name"></td>
-											<td><input type="text" th:value="${actor.gender}"
-												class="form-control" id="gender" placeholder="Gender">
+												class="form-control" id="last_name" placeholder="Last Name"
+												th:field="*{actors[__${stat.index}__].last_name}"></td>
+											<td>
+												<div class="form-group col-md-6">
+													<label class="checkbox inline"> <input type="radio"
+														th:field="*{actors[__${stat.index}__].gender}"
+														name="studio" value="Female">Female
+													</label> <label class="checkbox"> <input type="radio"
+														th:field="*{actors[__${stat.index}__].gender}"
+														name="studio" value="Male">Male
+													</label>
+												</div>
 											</td>
-											<td><img th:src="${actor.img}" class="img-fluid"
-												alt="Responsive image"></td>
+											<td><input class="img-fluid"
+												th:field="*{actors[__${stat.index}__].img}"></td>
 										</tr>
 									</tbody>
 								</table>

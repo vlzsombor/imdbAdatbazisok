@@ -16,7 +16,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="/movies/">Navbar</a>
+		<a class="navbar-brand" href="/movies/">Home</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -26,8 +26,10 @@
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link"
 					href="countStudiosMovies">Studio count</a></li>
-				<li class="nav-item active"><a class="nav-link" href="#">Pricing</a>
-				</li>
+				<li class="nav-item active"><a class="nav-link"
+					href="countActorsInMovies">Count actors in movies</a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="showByGender">Al lekérdezés</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -41,24 +43,23 @@
 			<div class="card-body"></div>
 			<div class="container my-5">
 				<div class="col-md-10">
-						<table class="table table-striped table-responsive-md">
-							<thead>
-								<tr>
-									<th>First Name</th>
-									<th>Last Name</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="query : ${queries}">
-									<td th:text="${query.get(0)}"></td>
-									<td th:text="${query.get(1)}"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					<table class="table table-striped table-responsive-md">
+						<thead>
+							<tr>
+								<th>Azok a filmek, amiknek a neve walt al kezdődik</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="query : ${queries}">
+								<td th:text="${query.get(0)}"></td>
+
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
+	</div>
 
 
 </body>

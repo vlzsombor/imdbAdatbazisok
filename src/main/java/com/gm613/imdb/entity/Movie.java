@@ -1,8 +1,8 @@
 package com.gm613.imdb.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -32,7 +33,7 @@ public class Movie implements Serializable {
     @NotBlank
     @Column(name = "title")
     private String title;
-
+    @NotNull
     @Column(name = "genre")
     private String genre;
 
@@ -43,6 +44,6 @@ public class Movie implements Serializable {
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "plays", joinColumns = { @JoinColumn(name = "movie_id") }, inverseJoinColumns = {
 	    @JoinColumn(name = "actor_id") })
-    private Set<Actor> actors = new HashSet<>();
+    private List<Actor> actors = new ArrayList<>();
 
 }

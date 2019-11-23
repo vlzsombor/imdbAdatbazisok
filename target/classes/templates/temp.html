@@ -1,1 +1,6 @@
-hello bello
+<ul th:each="element, miez: ${array}">
+    <li th:text="*{first_name}"></li>
+    <li th:text="${miez}"></li>
+	<li th:text="${array[miez.index].getFirst_name()}"></li>
+	
+</ul>
